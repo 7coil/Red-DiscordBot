@@ -306,7 +306,7 @@ class Economy:
 
     @_bank.command(pass_context=True, no_pm=True)
     async def register(self, ctx):
-        """Registers an account at the Red bank"""
+        """Registers an account at the TwentySix bank"""
         settings = self.settings[ctx.message.server.id]
         author = ctx.message.author
         credits = 0
@@ -318,7 +318,7 @@ class Economy:
                                "".format(author.mention, account.balance))
         except AccountAlreadyExists:
             await self.bot.say("{} You already have an account at the"
-                               " Red bank.".format(author.mention))
+                               " TwentySix bank.".format(author.mention))
 
     @_bank.command(pass_context=True)
     async def balance(self, ctx, user: discord.Member=None):
@@ -332,7 +332,7 @@ class Economy:
                     user.mention, self.bank.get_balance(user)))
             except NoAccount:
                 await self.bot.say("{} You don't have an account at the"
-                                   " Red bank. Type `{}bank register`"
+                                   " TwentySix bank. Type `{}bank register`"
                                    " to open one.".format(user.mention,
                                                           ctx.prefix))
         else:
