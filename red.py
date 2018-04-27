@@ -35,8 +35,8 @@ from io import TextIOWrapper
 #                 https://github.com/Rapptz/RoboDanny/
 #
 
-title = "__***RedBot***__"
-description = "__*A bot made by the youtuber Red The Dark Gamer*__"
+title = "Red"
+description = "Red - A multifunction Discord bot by Twentysix"
 
 
 class Bot(commands.Bot):

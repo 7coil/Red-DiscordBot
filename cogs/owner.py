@@ -827,19 +827,19 @@ class Owner:
     @commands.command()
     async def info(self):
         """Shows info about Red"""
-        author_repo = "https://github.com/RedDark/"
-        red_repo = author_repo + "/RedBot"
-        server_url = "https://discord.gg/hEFFpsc"
+        author_repo = "https://github.com/Twentysix26"
+        red_repo = author_repo + "/Red-DiscordBot"
+        server_url = "https://discord.gg/red"
         dpy_repo = "https://github.com/Rapptz/discord.py"
         python_url = "https://www.python.org/"
-        since = datetime.datetime(2016, 11, 11, 0, 0)
+        since = datetime.datetime(2016, 1, 2, 0, 0)
         days_since = (datetime.datetime.utcnow() - since).days
         dpy_version = "[{}]({})".format(discord.__version__, dpy_repo)
         py_version = "[{}.{}.{}]({})".format(*os.sys.version_info[:3],
                                              python_url)
-        wordgit = "RedBot"
-        worduse = "RedDark"
-        wordserv = "Dark Army HQ"
+        wordgit = "GitHub for Red-DiscordBot"
+        worduse = "Twentysix26 GitHub"
+        wordserv = "Red-DiscordBot Discord Server"
         gitstr = "[{}]({})".format(wordgit, red_repo)
         usestr = "[{}]({})".format(worduse, author_repo)
         servstr = "[{}]({})".format(wordserv, server_url)
@@ -854,11 +854,15 @@ class Owner:
                 except:
                     owner = None
         if not owner:
-            owner = "Red"
+            owner = "Unknown"
 
         about = (
-            "This is a Discord bot created by Red The Dark Gamer. "
-            "Make sure to check out Red at https://www.youtube.com/c/RedTheDarkGamer ")
+            "This is an instance of [Red, an open source Discord bot]({}) "
+            "created by [Twentysix]({}) and improved by many.\n\n"
+            "Red is backed by a passionate community who contributes and "
+            "creates content for everyone to enjoy. [Join us today]({}) "
+            "and help us improve!\n\n"
+            "".format(red_repo, author_repo, server_url))
 
         embed = discord.Embed(colour=discord.Colour.red())
         embed.add_field(name="Bot owned by", value=str(owner))
