@@ -17,7 +17,7 @@ except Exception as e:
 
 from __main__ import send_cmd_help, settings
 
-log = logging.getLogger("cronan.permissions")
+log = logging.getLogger("red.permissions")
 
 
 class PermissionsError(CommandNotFound):

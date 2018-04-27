@@ -1,8 +1,5 @@
-# CronanBot
-A clone of [fork fork fork](https://github.com/Cog-Creators/Red-DiscordBot), not made by me.
-
-## Install?
-[Instructions]()
+# RedBot
+A clone of [Cog-Creators/Red-DiscordBot](https://github.com/Cog-Creators/Red-DiscordBot), not made by me.
 
 ## Launch
 1. `python3 launcher.py`

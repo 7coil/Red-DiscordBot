@@ -16,7 +16,7 @@ import glob
 import os
 import aiohttp
 
-log = logging.getLogger("cronan.owner")
+log = logging.getLogger("red.owner")
 
 
 class CogNotFoundError(Exception):
@@ -45,8 +45,8 @@ class Owner:
     def __init__(self, bot):
         self.bot = bot
         self.setowner_lock = False
-        self.disabled_commands = dataIO.load_json("data/cronan/disabled_commands.json")
-        self.global_ignores = dataIO.load_json("data/cronan/global_ignores.json")
+        self.disabled_commands = dataIO.load_json("data/red/disabled_commands.json")
+        self.global_ignores = dataIO.load_json("data/red/global_ignores.json")
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
 
     def __unload(self):
@@ -229,7 +229,7 @@ class Owner:
 
     @commands.group(name="set", pass_context=True)
     async def _set(self, ctx):
-        """Changes Cronan's core settings"""
+        """Changes Red's core settings"""
         if ctx.invoked_subcommand is None:
             await self.bot.send_cmd_help(ctx)
             return
@@ -238,7 +238,7 @@ class Owner:
     async def owner(self, ctx):
         """Sets owner"""
         if self.bot.settings.no_prompt is True:
-            await self.bot.say("Console interaction is disabled. Start Cronan "
+            await self.bot.say("Console interaction is disabled. Start Red "
                                "without the `--no-prompt` flag to use this "
                                "command.")
             return
@@ -283,7 +283,7 @@ class Owner:
     @_set.command(pass_context=True)
     @checks.is_owner()
     async def prefix(self, ctx, *prefixes):
-        """Sets Cronan's global prefixes
+        """Sets Red's global prefixes
 
         Accepts multiple prefixes separated by a space. Enclose in double
         quotes if a prefix contains spaces.
@@ -303,7 +303,7 @@ class Owner:
     @_set.command(pass_context=True, no_pm=True)
     @checks.serverowner_or_permissions(administrator=True)
     async def serverprefix(self, ctx, *prefixes):
-        """Sets Cronan's prefixes for this server
+        """Sets Red's prefixes for this server
 
         Accepts multiple prefixes separated by a space. Enclose in double
         quotes if a prefix contains spaces.
@@ -336,7 +336,7 @@ class Owner:
     @_set.command(pass_context=True)
     @checks.is_owner()
     async def name(self, ctx, *, name):
-        """Sets Cronan's name"""
+        """Sets Red's name"""
         name = name.strip()
         if name != "":
             try:
@@ -356,7 +356,7 @@ class Owner:
     @_set.command(pass_context=True, no_pm=True)
     @checks.is_owner()
     async def nickname(self, ctx, *, nickname=""):
-        """Sets Cronan's nickname
+        """Sets Red's nickname
 
         Leaving this empty will remove it."""
         nickname = nickname.strip()
@@ -372,7 +372,7 @@ class Owner:
     @_set.command(pass_context=True)
     @checks.is_owner()
     async def status(self, ctx, *, status=None):
-        """Sets Cronan's status
+        """Sets Red's status
 
         Statuses:
             online
@@ -407,7 +407,7 @@ class Owner:
     @_set.command(pass_context=True)
     @checks.is_owner()
     async def stream(self, ctx, streamer=None, *, stream_title=None):
-        """Sets Cronan's streaming status
+        """Sets Red's streaming status
 
         Leaving both streamer and stream_title empty will clear it."""
 
@@ -433,7 +433,7 @@ class Owner:
     @_set.command()
     @checks.is_owner()
     async def avatar(self, url):
-        """Sets Cronan's avatar"""
+        """Sets Red's avatar"""
         try:
             async with self.session.get(url) as r:
                 data = await r.read()
@@ -449,7 +449,7 @@ class Owner:
     @_set.command(name="token")
     @checks.is_owner()
     async def _token(self, token):
-        """Sets Cronan's login token"""
+        """Sets Red's login token"""
         if len(token) < 50:
             await self.bot.say("Invalid token.")
         else:
@@ -489,7 +489,7 @@ class Owner:
 
     @blacklist.command(name="add")
     async def _blacklist_add(self, user: discord.Member):
-        """Adds user to Cronan's global blacklist"""
+        """Adds user to Red's global blacklist"""
         if user.id not in self.global_ignores["blacklist"]:
             self.global_ignores["blacklist"].append(user.id)
             self.save_global_ignores()
@@ -499,7 +499,7 @@ class Owner:
 
     @blacklist.command(name="remove")
     async def _blacklist_remove(self, user: discord.Member):
-        """Removes user from Cronan's global blacklist"""
+        """Removes user from Red's global blacklist"""
         if user.id in self.global_ignores["blacklist"]:
             self.global_ignores["blacklist"].remove(user.id)
             self.save_global_ignores()
@@ -530,13 +530,13 @@ class Owner:
         """Whitelist management commands
 
         If the whitelist is not empty, only whitelisted users will
-        be able to use Cronan"""
+        be able to use Red"""
         if ctx.invoked_subcommand is None:
             await self.bot.send_cmd_help(ctx)
 
     @whitelist.command(name="add")
     async def _whitelist_add(self, user: discord.Member):
-        """Adds user to Cronan's global whitelist"""
+        """Adds user to Red's global whitelist"""
         if user.id not in self.global_ignores["whitelist"]:
             if not self.global_ignores["whitelist"]:
                 msg = "\nNon-whitelisted users will be ignored."
@@ -550,7 +550,7 @@ class Owner:
 
     @whitelist.command(name="remove")
     async def _whitelist_remove(self, user: discord.Member):
-        """Removes user from Cronan's global whitelist"""
+        """Removes user from Red's global whitelist"""
         if user.id in self.global_ignores["whitelist"]:
             self.global_ignores["whitelist"].remove(user.id)
             self.save_global_ignores()
@@ -578,7 +578,7 @@ class Owner:
     @commands.command(pass_context=True)
     @checks.is_owner()
     async def shutdown(self, ctx, *, silently=None):
-        """Shuts down Cronan"""
+        """Shuts down Red"""
         wave = "\N{WAVING HAND SIGN}"
         skin = "\N{EMOJI MODIFIER FITZPATRICK TYPE-3}"
         dacommand = ctx.message
@@ -594,9 +594,9 @@ class Owner:
     @commands.command(pass_context=True)
     @checks.is_owner()
     async def restart(self, ctx, *, silently=None):
-        """Attempts to restart Cronan
+        """Attempts to restart Red
 
-        Makes Cronan quit with exit code 26
+        Makes Red quit with exit code 26
         The restart is not guaranteed: it must be dealt
         with by the process manager in use"""
         dacommand = ctx.message
@@ -682,7 +682,7 @@ class Owner:
 
     @commands.command()
     async def join(self):
-        """Shows Cronan's invite URL"""
+        """Shows Red's invite URL"""
         if self.bot.user.bot:
             await self.bot.whisper("Invite URL: https://discordapp.com/oauth2/authorize?client_id=335423008095338497&scope=bot&permissions=8")
         else:
@@ -826,9 +826,9 @@ class Owner:
 
     @commands.command()
     async def info(self):
-        """Shows info about Cronan"""
-        author_repo = "https://github.com/CronanDark/"
-        cronan_repo = author_repo + "/CronanBot"
+        """Shows info about Red"""
+        author_repo = "https://github.com/RedDark/"
+        red_repo = author_repo + "/RedBot"
         server_url = "https://discord.gg/hEFFpsc"
         dpy_repo = "https://github.com/Rapptz/discord.py"
         python_url = "https://www.python.org/"
@@ -837,10 +837,10 @@ class Owner:
         dpy_version = "[{}]({})".format(discord.__version__, dpy_repo)
         py_version = "[{}.{}.{}]({})".format(*os.sys.version_info[:3],
                                              python_url)
-        wordgit = "CronanBot"
-        worduse = "CronanDark"
+        wordgit = "RedBot"
+        worduse = "RedDark"
         wordserv = "Dark Army HQ"
-        gitstr = "[{}]({})".format(wordgit, cronan_repo)
+        gitstr = "[{}]({})".format(wordgit, red_repo)
         usestr = "[{}]({})".format(worduse, author_repo)
         servstr = "[{}]({})".format(wordserv, server_url)
         
@@ -854,11 +854,11 @@ class Owner:
                 except:
                     owner = None
         if not owner:
-            owner = "Cronan"
+            owner = "Red"
 
         about = (
-            "This is a Discord bot created by Cronan The Dark Gamer. "
-            "Make sure to check out Cronan at https://www.youtube.com/c/CronanTheDarkGamer ")
+            "This is a Discord bot created by Red The Dark Gamer. "
+            "Make sure to check out Red at https://www.youtube.com/c/RedTheDarkGamer ")
 
         embed = discord.Embed(colour=discord.Colour.red())
         embed.add_field(name="Bot owned by", value=str(owner))
@@ -867,7 +867,7 @@ class Owner:
         embed.add_field(name="Bot's Github", value=gitstr)
         embed.add_field(name="Bot Owner's Github", value=usestr)
         embed.add_field(name="Bot's Official Discord Server", value=servstr)
-        embed.add_field(name="About Cronan", value=about, inline=False)
+        embed.add_field(name="About Red", value=about, inline=False)
         embed.set_footer(text="Bringing joy since 11 Nov 2016 (over "
                          "{} days ago!)".format(days_since))
 
@@ -879,7 +879,7 @@ class Owner:
 
     @commands.command()
     async def uptime(self):
-        """Shows Cronan's uptime"""
+        """Shows Red's uptime"""
         since = self.bot.uptime.strftime("%m-%d-%Y %H:%M:%S")
         passed = self.get_bot_uptime()
         await self.bot.say("Been up for: **{}** (since {} EST)"
@@ -896,7 +896,7 @@ class Owner:
 
     @commands.command()
     async def version(self):
-        """Shows Cronan's current version"""
+        """Shows Red's current version"""
         response = self.bot.loop.run_in_executor(None, self._get_version)
         result = await asyncio.wait_for(response, timeout=10)
         try:
@@ -908,7 +908,7 @@ class Owner:
     @commands.command()
     async def patreon(self):
         """show's the bot's patreon link"""
-        patreon_url = "https://www.patreon.com/CronanBot"
+        patreon_url = "https://www.patreon.com/RedBot"
         embed = discord.Embed(colour=discord.Colour.red())
         embed.add_field(name="Bot Patreon:", value=patreon_url)
 
@@ -1008,7 +1008,7 @@ class Owner:
 
     def _get_version(self):
         if not os.path.isdir(".git"):
-            msg = "This instance of Cronan hasn't been installed with git."
+            msg = "This instance of Red hasn't been installed with git."
             e = discord.Embed(title=msg,
                               colour=discord.Colour.red())
             return e
@@ -1066,10 +1066,10 @@ class Owner:
         return fmt.format(d=days, h=hours, m=minutes, s=seconds)
 
     def save_global_ignores(self):
-        dataIO.save_json("data/cronan/global_ignores.json", self.global_ignores)
+        dataIO.save_json("data/red/global_ignores.json", self.global_ignores)
 
     def save_disabled_commands(self):
-        dataIO.save_json("data/cronan/disabled_commands.json", self.disabled_commands)
+        dataIO.save_json("data/red/disabled_commands.json", self.disabled_commands)
 
 
 def _import_old_data(data):
@@ -1088,11 +1088,11 @@ def _import_old_data(data):
 
 
 def check_files():
-    if not os.path.isfile("data/cronan/disabled_commands.json"):
+    if not os.path.isfile("data/red/disabled_commands.json"):
         print("Creating empty disabled_commands.json...")
-        dataIO.save_json("data/cronan/disabled_commands.json", [])
+        dataIO.save_json("data/red/disabled_commands.json", [])
 
-    if not os.path.isfile("data/cronan/global_ignores.json"):
+    if not os.path.isfile("data/red/global_ignores.json"):
         print("Creating empty global_ignores.json...")
         data = {"blacklist": [], "whitelist": []}
         try:
@@ -1101,7 +1101,7 @@ def check_files():
             log.error("Failed to migrate blacklist / whitelist data from "
                       "mod.py: {}".format(e))
 
-        dataIO.save_json("data/cronan/global_ignores.json", data)
+        dataIO.save_json("data/red/global_ignores.json", data)
 
 
 def setup(bot):

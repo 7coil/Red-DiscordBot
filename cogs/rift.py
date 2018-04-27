@@ -124,7 +124,7 @@ class Rift:
 
     @commands.command(pass_context=True)
     async def riftopen(self, ctx, channel):
-        """Makes you able to communicate with other channels through Cronan
+        """Makes you able to communicate with other channels through Red
 
         This is cross-server. Type only the channel name or the ID."""
         author = ctx.message.author
@@ -274,7 +274,7 @@ class Rift:
             url = a['url']
             content += "\nUploaded: [{}]({})".format(fname, url)
         footer = 'Said in {} #{} at {} UTC'.format(sname, cname, timestamp)
-        botowner = "Cronan The Dark Gamer"
+        botowner = "Red The Dark Gamer"
         if message.author.name == botowner:
             msgcolor = discord.Color.red()
         else:

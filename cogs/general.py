@@ -123,7 +123,7 @@ class General:
 		points = self.points
 		author = ctx.message.author
 		player_choice = your_choice.choice
-		cronan_choice = choice((RPS.rock, RPS.paper, RPS.scissors))
+		red_choice = choice((RPS.rock, RPS.paper, RPS.scissors))
 		cond = {
 				(RPS.rock,     RPS.paper)    : False,
 				(RPS.rock,     RPS.scissors) : True,
@@ -133,14 +133,14 @@ class General:
 				(RPS.scissors, RPS.paper)    : True
 				}
 
-		if cronan_choice == player_choice:
+		if red_choice == player_choice:
 			outcome = None # Tie
 		else:
-			outcome = cond[(player_choice, cronan_choice)]
+			outcome = cond[(player_choice, red_choice)]
 
 		if outcome is True:
 			await self.bot.say("{} You win {}!"
-								"".format(cronan_choice.value, author.mention))
+								"".format(red_choice.value, author.mention))
 			userexist = False
 			for i, s in enumerate(points):
 				if s["USER"] == points:
@@ -170,7 +170,7 @@ class General:
 				dataIO.save_json("data/general/rpspoints.json", self.points)
 		elif outcome is False:
 			await self.bot.say("{} You lose {}!"
-								"".format(cronan_choice.value, author.mention))
+								"".format(red_choice.value, author.mention))
 			userexist = False
 			for i, s in enumerate(points):
 				if s["USER"] == points:
@@ -200,7 +200,7 @@ class General:
 				dataIO.save_json("data/general/rpspoints.json", self.points)
 		else:
 			await self.bot.say("{} We're square {}!"
-								"".format(cronan_choice.value, author.mention))
+								"".format(red_choice.value, author.mention))
 			userexist = False
 			for i, s in enumerate(points):
 				if s["USER"] == points:
@@ -607,7 +607,7 @@ class General:
 
 	@commands.command()
 	async def suggest(self):
-		"""Suggest stuff for CronanBot"""
+		"""Suggest stuff for RedBot"""
 		suggest_link = "https://goo.gl/forms/VANDeJ0ktM1CJRlC2"
 		click_here = "[{}]({})".format("Click Here", suggest_link)
 		

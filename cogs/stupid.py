@@ -6,7 +6,7 @@ from cogs.utils import checks
 from cogs.utils.dataIO import dataIO
 
 class Stupid():
-    """Stupid commands Cronan builds in for no reason what so ever"""
+    """Stupid commands Red builds in for no reason what so ever"""
 
     def __init__(self, bot):
         self.bot = bot
@@ -14,7 +14,7 @@ class Stupid():
 
 
     @commands.command()
-    async def cronan(self):
+    async def red(self):
         """why? just why?"""
         await self.bot.say("ew... y do u like that cringy yter who cant even code me right or have me alive 24/7")
 

@@ -306,7 +306,7 @@ class Economy:
 
     @_bank.command(pass_context=True, no_pm=True)
     async def register(self, ctx):
-        """Registers an account at the Cronan bank"""
+        """Registers an account at the Red bank"""
         settings = self.settings[ctx.message.server.id]
         author = ctx.message.author
         credits = 0
@@ -318,7 +318,7 @@ class Economy:
                                "".format(author.mention, account.balance))
         except AccountAlreadyExists:
             await self.bot.say("{} You already have an account at the"
-                               " Cronan bank.".format(author.mention))
+                               " Red bank.".format(author.mention))
 
     @_bank.command(pass_context=True)
     async def balance(self, ctx, user: discord.Member=None):
@@ -332,7 +332,7 @@ class Economy:
                     user.mention, self.bank.get_balance(user)))
             except NoAccount:
                 await self.bot.say("{} You don't have an account at the"
-                                   " Cronan bank. Type `{}bank register`"
+                                   " Red bank. Type `{}bank register`"
                                    " to open one.".format(user.mention,
                                                           ctx.prefix))
         else:
@@ -369,9 +369,9 @@ class Economy:
         Passing positive and negative values will add/remove money instead
 
         Examples:
-            bank set @Cronan 26 - Sets $26
-            bank set @Cronan +2 - Adds $2
-            bank set @Cronan -6 - Removes $6"""
+            bank set @Twentysix 26 - Sets $26
+            bank set @Twentysix +2 - Adds $2
+            bank set @Twentysix -6 - Removes $6"""
         author = ctx.message.author
         try:
             if money.operation == "deposit":
@@ -727,7 +727,7 @@ def setup(bot):
     global logger
     check_folders()
     check_files()
-    logger = logging.getLogger("cronan.economy")
+    logger = logging.getLogger("red.economy")
     if logger.level == 0:
         # Prevents the logger from being loaded again in case of module reload
         logger.setLevel(logging.INFO)

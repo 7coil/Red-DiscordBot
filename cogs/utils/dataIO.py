@@ -8,7 +8,7 @@ class InvalidFileIO(Exception):
 
 class DataIO():
     def __init__(self):
-        self.logger = logging.getLogger("cronan")
+        self.logger = logging.getLogger("red")
 
     def save_json(self, filename, data):
         """Atomically saves json file"""

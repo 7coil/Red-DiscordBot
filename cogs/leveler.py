@@ -37,7 +37,7 @@ bg_credits = {
 # directory
 user_directory = "data/leveler/users"
 
-prefix = dataIO.load_json("data/cronan/settings.json")['PREFIXES']
+prefix = dataIO.load_json("data/red/settings.json")['PREFIXES']
 default_avatar_url = "http://i.imgur.com/XPDO9VH.jpg"
 
 try:
@@ -54,7 +54,7 @@ class Leveler:
         self.backgrounds = dataIO.load_json("data/leveler/backgrounds.json")
         self.badges = dataIO.load_json("data/leveler/badges.json")
         self.settings = dataIO.load_json("data/leveler/settings.json")
-        bot_settings = dataIO.load_json("data/cronan/settings.json")
+        bot_settings = dataIO.load_json("data/red/settings.json")
         self.owner = bot_settings["OWNER"]
         self.userlevels = dataIO.load_json("data/leveler/userlevels.json")
         self.cooldown = dataIO.load_json("data/leveler/cooldown.json")
@@ -3248,7 +3248,7 @@ def check_file():
                 "mountaindawn": "http://i.imgur.com/kJ1yYY6.jpg",
                 "waterlilies": "http://i.imgur.com/qwdcJjI.jpg",
                 "greenery": "http://i.imgur.com/70ZH6LX.png",
-                "cronanpro" : "http://i.imgur.com/haugIC7.jpg"
+                "redpro" : "http://i.imgur.com/haugIC7.jpg"
             },
             "rank": {
                 "aurora" : "http://i.imgur.com/gVSbmYj.jpg",
@@ -3257,11 +3257,11 @@ def check_file():
                 "mountain" : "http://i.imgur.com/qYqEUYp.jpg",
                 "abstract" : "http://i.imgur.com/70ZH6LX.png",
                 "city": "http://i.imgur.com/yr2cUM9.jpg",
-                "cronanrank" : "http://i.imgur.com/sY8KJAI.jpg"
+                "redrank" : "http://i.imgur.com/sY8KJAI.jpg"
             },
             "levelup": {
                 "default" : "http://i.imgur.com/eEFfKqa.jpg",
-                "cronanup" : "http://i.imgur.com/sY8KJAI.jpg"
+                "redup" : "http://i.imgur.com/sY8KJAI.jpg"
             },
         }
 

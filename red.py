@@ -23,20 +23,20 @@ from collections import Counter
 from io import TextIOWrapper
 
 #
-# CronanBot, a Discord bot by Cronan, based on discord.py and its command
+# RedBot, a Discord bot by Red, based on discord.py and its command
 #                             extension.
 #
-#                   https://github.com/CronanDark/
+#                   https://github.com/RedDark/
 #
 #
-# cronan.py and cogs/utils/checks.py both contain some modified functions
+# red.py and cogs/utils/checks.py both contain some modified functions
 #                     originally made by Rapptz.
 #
 #                 https://github.com/Rapptz/RoboDanny/
 #
 
-title = "__***CronanBot***__"
-description = "__*A bot made by the youtuber Cronan The Dark Gamer*__"
+title = "__***RedBot***__"
+description = "__*A bot made by the youtuber Red The Dark Gamer*__"
 
 
 class Bot(commands.Bot):
@@ -91,10 +91,10 @@ class Bot(commands.Bot):
         return await super().send_message(*args, **kwargs)
 
     async def shutdown(self, *, restart=False):
-        """Gracefully quits Cronan with exit code 0
+        """Gracefully quits Red with exit code 0
 
         If restart is True, the exit code will be 26 instead
-        The launcher automatically restarts Cronan when that happens"""
+        The launcher automatically restarts Red when that happens"""
         self._shutdown_mode = not restart
         await self.logout()
 
@@ -301,7 +301,7 @@ def initialize(bot_class=Bot, formatter_class=Formatter):
         owner = await set_bot_owner()
 
         print("-----------------")
-        print("CronanBot - Discord Bot")
+        print("RedBot - Discord Bot")
         print("-----------------")
         print(str(bot.user))
         print("\nConnected to:")
@@ -405,7 +405,7 @@ def initialize(bot_class=Bot, formatter_class=Formatter):
 
 
 def check_folders():
-    folders = ("data", "data/cronan", "cogs", "cogs/utils")
+    folders = ("data", "data/red", "cogs", "cogs/utils")
     for folder in folders:
         if not os.path.exists(folder):
             print("Creating " + folder + " folder...")
@@ -416,7 +416,7 @@ def interactive_setup(settings):
     first_run = settings.bot_settings == settings.default_settings
 
     if first_run:
-        print("Cronan - First run configuration\n")
+        print("Red - First run configuration\n")
         print("Why u do dis?")
         print("and obtain your bot's token like described.")
 
@@ -467,23 +467,23 @@ def interactive_setup(settings):
         settings.save_settings()
 
         print("\nThe configuration is done. Leave this window always open to"
-              " keep Cronan online.\nAll commands will have to be issued through"
+              " keep Red online.\nAll commands will have to be issued through"
               " Discord's chat, *this window will now be read only*.\n"
               "Press enter to continue")
         input("\n")
 
 
 def set_logger(bot):
-    logger = logging.getLogger("cronan")
+    logger = logging.getLogger("red")
     logger.setLevel(logging.INFO)
 
-    cronan_format = logging.Formatter(
+    red_format = logging.Formatter(
         '%(asctime)s %(levelname)s %(module)s %(funcName)s %(lineno)d: '
         '%(message)s',
         datefmt="[%d/%m/%Y %H:%M]")
 
     stdout_handler = logging.StreamHandler(sys.stdout)
-    stdout_handler.setFormatter(cronan_format)
+    stdout_handler.setFormatter(red_format)
     if bot.settings.debug:
         stdout_handler.setLevel(logging.DEBUG)
         logger.setLevel(logging.DEBUG)
@@ -492,9 +492,9 @@ def set_logger(bot):
         logger.setLevel(logging.INFO)
 
     fhandler = logging.handlers.RotatingFileHandler(
-        filename='data/cronan/cronan.log', encoding='utf-8', mode='a',
+        filename='data/red/red.log', encoding='utf-8', mode='a',
         maxBytes=10**7, backupCount=5)
-    fhandler.setFormatter(cronan_format)
+    fhandler.setFormatter(red_format)
 
     logger.addHandler(fhandler)
     logger.addHandler(stdout_handler)
@@ -505,7 +505,7 @@ def set_logger(bot):
     else:
         dpy_logger.setLevel(logging.WARNING)
     handler = logging.FileHandler(
-        filename='data/cronan/discord.log', encoding='utf-8', mode='a')
+        filename='data/red/discord.log', encoding='utf-8', mode='a')
     handler.setFormatter(logging.Formatter(
         '%(asctime)s %(levelname)s %(module)s %(funcName)s %(lineno)d: '
         '%(message)s',
@@ -533,10 +533,10 @@ def get_answer():
         return False
 
 
-def set_cog(cog, value):  # TODO: move this out of cronan.py
-    data = dataIO.load_json("data/cronan/cogs.json")
+def set_cog(cog, value):  # TODO: move this out of red.py
+    data = dataIO.load_json("data/red/cogs.json")
     data[cog] = value
-    dataIO.save_json("data/cronan/cogs.json", data)
+    dataIO.save_json("data/red/cogs.json", data)
 
 
 def load_cogs(bot):
@@ -544,7 +544,7 @@ def load_cogs(bot):
                 "general", "image", "mod", "streams", "trivia", "leveler")
 
     try:
-        registry = dataIO.load_json("data/cronan/cogs.json")
+        registry = dataIO.load_json("data/red/cogs.json")
     except:
         registry = {}
 
@@ -552,13 +552,13 @@ def load_cogs(bot):
     owner_cog = bot.get_cog('Owner')
     if owner_cog is None:
         print("The owner cog is missing. It contains core functions without "
-              "which Cronan cannot function. Reinstall.")
+              "which Red cannot function. Reinstall.")
         exit(1)
 
     if bot.settings._no_cogs:
         bot.logger.debug("Skipping initial cogs loading (--no-cogs)")
-        if not os.path.isfile("data/cronan/cogs.json"):
-            dataIO.save_json("data/cronan/cogs.json", {})
+        if not os.path.isfile("data/red/cogs.json"):
+            dataIO.save_json("data/red/cogs.json", {})
         return
 
     failed = []
@@ -581,7 +581,7 @@ def load_cogs(bot):
                 failed.append(extension)
                 registry[extension] = False
 
-    dataIO.save_json("data/cronan/cogs.json", registry)
+    dataIO.save_json("data/red/cogs.json", registry)
 
     if failed:
         print("\nFailed to load: {}\n".format(" ".join(failed)))

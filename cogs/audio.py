@@ -19,10 +19,10 @@ import time
 import inspect
 import subprocess
 
-__author__ = "Cronan"
+__author__ = "tekulvw"
 __version__ = "0.1.1"
 
-log = logging.getLogger("cronan.audio")
+log = logging.getLogger("red.audio")
 
 try:
     import youtube_dl
@@ -1840,7 +1840,7 @@ class Audio:
 
     @commands.command(pass_context=True, no_pm=True)
     async def sing(self, ctx):
-        """Makes Cronan sing one of his songs"""
+        """Makes Red sing one of his songs"""
         ids = ("zGTkAVsrfg8", "cGMWL8cOeAU", "vFrjMq4aL-g", "WROI5WYBU_A",
                "41tIUr_ex3g", "f9O2Rjn1azc")
         url = "https://www.youtube.com/watch?v={}".format(choice(ids))

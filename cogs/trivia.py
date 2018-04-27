@@ -36,7 +36,7 @@ class Trivia:
         server = ctx.message.server
         if ctx.invoked_subcommand is None:
             settings = self.settings[server.id]
-            msg = box("Cronan gains points: {BOT_PLAYS}\n"
+            msg = box("Red gains points: {BOT_PLAYS}\n"
                       "Seconds to answer: {DELAY}\n"
                       "Points to win: {MAX_SCORE}\n"
                       "Reveal answer on timeout: {REVEAL_ANSWER}\n"
@@ -68,7 +68,7 @@ class Trivia:
 
     @triviaset.command(pass_context=True)
     async def botplays(self, ctx):
-        """Cronan gains points"""
+        """Red gains points"""
         server = ctx.message.server
         if self.settings[server.id]["BOT_PLAYS"]:
             self.settings[server.id]["BOT_PLAYS"] = False
@@ -126,7 +126,7 @@ class Trivia:
                 except:
                     owner = None
         if not owner:
-            owner = "Cronan"
+            owner = "Red"
         await self.bot.send_message(discord.User(id=user), "__***How to make a trivia list:***__")
         await asyncio.sleep(1)
         await self.bot.send_message(discord.User(id=user), "1. open up notepad or whatever you use for .txt files")

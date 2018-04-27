@@ -10,7 +10,7 @@ import os
 from discord.server import Server
 
 
-log = logging.getLogger("cronan.admin")
+log = logging.getLogger("red.admin")
 
 
 class Admin:
